@@ -105,3 +105,23 @@ const books = [
 
 
 // SNACK 5
+// Usando la l'API https://boolean-spec-frontend.vercel.app/freetestapi/books/{id}
+// usa la combinazione di .map() e Promise.all(),
+// per creare una funzione (getBooks) che a partire da un array di id (ids),
+// ritorna una promise che risolve un array di libri (books).
+// Testala con l’array [2, 13, 7, 21, 19] .
+
+const id = [2, 13, 7, 21, 19];
+
+async function getBooks(id) {
+
+    const url = "http://localhost:3333/books/"
+
+    const bookPromises = id.map(id => fetch(url + id).then(r => r.json()));
+
+    const books = await Promise.all(bookPromises);
+
+    return books;
+}
+
+getBooks(id).then(books => console.log(books));
