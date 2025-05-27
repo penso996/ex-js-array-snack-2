@@ -111,17 +111,40 @@ const books = [
 // ritorna una promise che risolve un array di libri (books).
 // Testala con l’array [2, 13, 7, 21, 19] .
 
-const id = [2, 13, 7, 21, 19];
+// const id = [2, 13, 7, 21, 19];
 
-async function getBooks(id) {
+// async function getBooks(id) {
 
-    const url = "http://localhost:3333/books/"
+//     const url = "http://localhost:3333/books/"
 
-    const bookPromises = id.map(id => fetch(url + id).then(r => r.json()));
+//     const bookPromises = id.map(id => fetch(url + id).then(r => r.json()));
 
-    const books = await Promise.all(bookPromises);
+//     const books = await Promise.all(bookPromises);
 
-    return books;
-}
+//     return books;
+// }
 
-getBooks(id).then(books => console.log(books));
+// getBooks(id).then(books => console.log(books));
+
+
+// SNACK 6
+// Crea una variabile booleana (areThereAvailableBooks) per verificare se c’è almeno un libro disponibile.
+// Crea un array (booksByPrice) con gli elementi di books ordinati in base al prezzo (crescente).
+// Ordina l’array booksByPricein base alla disponibilità (prima quelli disponibili), senza creare un nuovo array.
+
+const areThereAvailableBooks = books.some(book => book.available);
+
+const booksByPrice = books.map(book => book);
+
+booksByPrice.sort((a, b) => {
+    return parseFloat(a.price) - parseFloat(b.price);
+})
+
+booksByPrice.sort((a, b) => {
+    return a.available === b.available ? 0 : a.available ? -1 : 1;
+})
+
+console.log(booksByPrice);
+
+// SNACK 7
+// Usa reduce per creare un oggetto (tagCounts) che conta quante volte ogni tag viene usato tra i libri.
