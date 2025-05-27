@@ -132,19 +132,32 @@ const books = [
 // Crea un array (booksByPrice) con gli elementi di books ordinati in base al prezzo (crescente).
 // Ordina l’array booksByPricein base alla disponibilità (prima quelli disponibili), senza creare un nuovo array.
 
-const areThereAvailableBooks = books.some(book => book.available);
+// const areThereAvailableBooks = books.some(book => book.available);
 
-const booksByPrice = books.map(book => book);
+// const booksByPrice = books.map(book => book);
 
-booksByPrice.sort((a, b) => {
-    return parseFloat(a.price) - parseFloat(b.price);
-})
+// booksByPrice.sort((a, b) => {
+//     return parseFloat(a.price) - parseFloat(b.price);
+// })
 
-booksByPrice.sort((a, b) => {
-    return a.available === b.available ? 0 : a.available ? -1 : 1;
-})
+// booksByPrice.sort((a, b) => {
+//     return a.available === b.available ? 0 : a.available ? -1 : 1;
+// })
 
-console.log(booksByPrice);
+// console.log(booksByPrice);
+
 
 // SNACK 7
 // Usa reduce per creare un oggetto (tagCounts) che conta quante volte ogni tag viene usato tra i libri.
+
+const tagCounts = books.reduce((acc, curr) => {
+    curr.tags.forEach(tag => {
+        if (!acc[tag]) {
+            acc[tag] = 0;
+        }
+        acc[tag]++;
+    })
+    return acc;
+}, {});
+
+console.log(tagCounts);
